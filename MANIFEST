@@ -1,0 +1,10 @@
+Changes
+Lib.xs
+Makefile.PL
+MANIFEST
+ppport.h
+README
+t/Comedi-Lib.t
+fallback/const-c.inc
+fallback/const-xs.inc
+lib/Comedi/Lib.pm

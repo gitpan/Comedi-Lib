@@ -1,0 +1,36 @@
+Comedi-Lib version 0.01
+=======================
+
+The Comedi::Lib module provides a Perl API for Comedilib.
+Comedilib is a separately distributed package containing a user-space
+library that provides a developer-friendly interface to the comedi devices.
+This module consists of the functions that the Comedilib library provides
+(wrapper).
+
+INSTALLATION
+
+To install this module type the following:
+
+   perl Makefile.PL
+   make
+   make test
+   make install
+
+DEPENDENCIES
+
+This interface is dependent on the Comedilib library. Please download and
+install the latest version at http://www.comedi.org/.
+
+The Comedilib library _must_ be found in your library path when using this
+module. The library is defaultly installed in /usr/local/lib -- in this
+case, be sure that the /usr/local/lib path is in your /etc/ld.so.conf.
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2009 by Manuel Gebele
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.8.8 or,
+at your option, any later version of Perl 5 you may have available.
+
+
