@@ -1,40 +1,70 @@
-use 5.008008;
-use ExtUtils::MakeMaker;
-# See lib/ExtUtils/MakeMaker.pm for details of how to influence
-# the contents of the Makefile that is written.
-WriteMakefile(
-    NAME              => 'Comedi::Lib',
-    VERSION_FROM      => 'lib/Comedi/Lib.pm', # finds $VERSION
-    PREREQ_PM         => {}, # e.g., Module::Name => 1.1
-    ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
-      (ABSTRACT_FROM  => 'lib/Comedi/Lib.pm', # retrieve abstract from module
-       AUTHOR         => 'Manuel Gebele <forensixs@gmx.de>') : ()),
-    LIBS              => ['-lcomedi '], # e.g., '-lm'
-    DEFINE            => '', # e.g., '-DHAVE_SOMETHING'
-    INC               => '-I.', # e.g., '-I. -I/usr/include/other'
-	# Un-comment this if you add C files to link with later:
-    # OBJECT            => '$(O_FILES)', # link all the C files too
-);
-if  (eval {require ExtUtils::Constant; 1}) {
-  # If you edit these definitions to change the constants used by this module,
-  # you will need to use the generated const-c.inc and const-xs.inc
-  # files to replace their "fallback" counterparts before distributing your
-  # changes.
-  my @names = (qw());
-  ExtUtils::Constant::WriteConstants(
-                                     NAME         => 'Comedi::Lib',
-                                     NAMES        => \@names,
-                                     DEFAULT_TYPE => 'IV',
-                                     C_FILE       => 'const-c.inc',
-                                     XS_FILE      => 'const-xs.inc',
-                                  );
+# Part of Comedi::Lib
+#
+# Copyright (c) 2009 Manuel Gebele <forensixs@gmx.de>
+#
+use strict;
+use warnings;
+use Inline::MakeMaker;
 
+unless (header_found()) {
+   die <<"END";
+ERROR: Can't find comedilib.h header file.
+
+If the library is not installed, you will need to install it. if it is
+installed somewhere other than /usr/include or /usr/local/include, you
+need to set the following environment variables:
+
+   COMEDILIB_LIBDIR should contain the path to the comedilib libraries
+   COMEDILIB_INCDIR should contain the path to the comedilib header files
+
+END
 }
-else {
-  use File::Copy;
-  use File::Spec;
-  foreach my $file ('const-c.inc', 'const-xs.inc') {
-    my $fallback = File::Spec->catfile('fallback', $file);
-    copy ($fallback, $file) or die "Can't copy $fallback to $file: $!";
-  }
+
+unless (lib_found()) {
+   die <<"END";
+ERROR: Can't find libcomedi.so library file.
+
+If the library is not installed, you will need to install it. If it is
+installed somewhere other than /usr/lib or /usr/local/lib, you need to
+set the following environment variables:
+
+   COMEDILIB_LIBDIR should contain the path to the comedilib libraries
+   COMEDILIB_INCDIR should contain the path to the comedilib header files
+   
+END
 }
+
+sub header_found {
+   foreach my $dir (qw(/usr/include /usr/local/include),
+                    $ENV{COMEDILIB_INCDIR}) {
+      return 1 if defined $dir && -e "$dir/comedilib.h";
+   }
+   return;
+}
+
+sub lib_found {
+   foreach my $dir (qw(/usr/lib /usr/local/lib), $ENV{COMEDILIB_LIBDIR}) {
+      return 1 if defined $dir && -e "$dir/libcomedi.so";
+   }
+   return;
+}
+
+WriteMakefile(
+   NAME                => 'Comedi::Lib',
+   AUTHOR              => 'Manuel Gebele <forensixs@gmx.de>',
+   VERSION_FROM        => 'lib/Comedi/Lib.pm',
+   ABSTRACT_FROM       => 'lib/Comedi/Lib.pm',
+   ($ExtUtils::MakeMaker::VERSION >= 6.3002 ? ('LICENSE'=> 'perl') : ()),
+   PL_FILES            => {},
+   PREREQ_PM => {
+      'Test::More' => 0,
+      'Carp'       => 0,
+      'POSIX'      => 0,
+      'Inline'     => 0,
+      'Inline::C'  => 0,
+      'define'     => 0, # tested with define v.1.02
+      'enum'       => 0, # tested with enum v.1.016
+   },
+   dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
+   clean               => { FILES => 'Comedi-Lib-* Lib.inl _Inline' },
+);

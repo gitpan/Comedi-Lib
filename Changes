@@ -1,6 +1,12 @@
-Revision history for Perl extension Comedi::Lib.
+# 
+# Part of Comedi::Lib
+#
+# Copyright (c) 2009 Manuel Gebele <forensixs@gmx.de>
+#
+Revision history for Comedi::Lib
 
-0.01  Sun Jul  5 18:24:03 2009
-	- original version; created by h2xs 1.23 with options
-		-b 5.8.8 -O -n Comedi::Lib /usr/local/include/comedilib.h -lcomedi
-
+0.23    2009/08/01
+        The Comedi::Lib module was completely re-written.
+0.01    2009/07/09
+        The first version of the Comedi::Lib module was released.
+        (only a wrapper module)

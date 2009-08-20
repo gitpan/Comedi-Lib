@@ -1,36 +1,50 @@
-Comedi-Lib version 0.01
-=======================
+Comedi::Lib
 
-The Comedi::Lib module provides a Perl API for Comedilib.
-Comedilib is a separately distributed package containing a user-space
-library that provides a developer-friendly interface to the comedi devices.
-This module consists of the functions that the Comedilib library provides
-(wrapper).
+This module provides a Perl API for Comedilib. Comedilib is a separately
+distributed package containing a user-space library that provides a 
+developer-friendly interface to the Comedi devices. This module consists of
+the functions that the Comedilib library provides.
+
+TODO
+
+I don't use XS, C::Scan or something like that, to export constants and macros
+to the callers name-space, as long as it's not clarified which constants and
+macros used for Comedilib and which for 'pure' Comedi (driver development).
+Both the documentation and the source code couldn't help me at all to resolve
+that problem.
+
+NOTE
+
+This module does _not_ support any ALPHA constants, macros or functions.
+This will be done by a separately module, anytime soon.
 
 INSTALLATION
 
-To install this module type the following:
+To install this module, run the following commands:
 
    perl Makefile.PL
    make
    make test
    make install
 
-DEPENDENCIES
+SUPPORT & DOCUMENTATION
 
-This interface is dependent on the Comedilib library. Please download and
-install the latest version at http://www.comedi.org/.
+After installing, you can find documentation for this module with the perldoc command.
 
-The Comedilib library _must_ be found in your library path when using this
-module. The library is defaultly installed in /usr/local/lib -- in this
-case, be sure that the /usr/local/lib path is in your /etc/ld.so.conf.
+   perldoc Comedi::Lib
 
-COPYRIGHT AND LICENCE
+You can also look for information at:
 
-Copyright (C) 2009 by Manuel Gebele
+   Comedi
+   http://www.comedi.org
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself, either Perl version 5.8.8 or,
-at your option, any later version of Perl 5 you may have available.
+BUGS
 
+Please report any bugs or feature request to my email address.
 
+COPYRIGHT & LICENCE
+
+Copyright (C) 2009 Manuel Gebele
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.

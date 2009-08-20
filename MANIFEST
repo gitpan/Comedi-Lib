@@ -1,10 +1,28 @@
+# 
+# Part of Comedi::Lib
+#
+# Copyright (c) 2009 Manuel Gebele <forensixs@gmx.de>
+#
 Changes
-Lib.xs
+ctags/tags
+lib/Comedi/Lib.pm
+Lib.pm
 Makefile.PL
 MANIFEST
-ppport.h
+map/typemap
+META.yml
 README
-t/Comedi-Lib.t
-fallback/const-c.inc
-fallback/const-xs.inc
-lib/Comedi/Lib.pm
+t/00-load.t
+t/01-new-object.t
+t/02-subroutines.t
+t/03-constants.t
+t/04-macros.t
+t/05-open.t
+t/06-close.t
+t/boilerplate.t
+t/pod-coverage.t
+t/pod.t
+utilitys/clean
+utilitys/fourstep
+utilitys/threestep
+vim_info

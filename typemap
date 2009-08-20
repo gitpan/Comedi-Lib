@@ -1,7 +1,0 @@
-comedi_t *        T_PTRREF
-lsampl_t          T_U_INT
-lsampl_t *        T_PV
-comedi_range *    T_PTRREF
-comedi_insnlist * T_PTRREF
-comedi_insn *     T_PTRREF
-comedi_cmd  *     T_PTRREF
