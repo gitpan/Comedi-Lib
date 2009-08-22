@@ -2,7 +2,7 @@
 # 
 # Part of Comedi::Lib
 #
-# Copyright (c) 2009 Manuel Gebele <forensixs@gmx.de>
+# Copyright (c) 2009 Manuel Gebele <forensixs@gmx.de>, Germany
 #
 use strict;
 use warnings;
@@ -50,7 +50,7 @@ TODO: {
     "placeholder date/time"       => qr(Date/time)
   );
 
-  module_boilerplate_ok('lib/Comedi/Lib.pm');
+  module_boilerplate_ok('Lib.pm');
 
 
 }

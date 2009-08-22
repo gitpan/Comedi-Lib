@@ -2,7 +2,7 @@
 # 
 # Part of Comedi::Lib
 #
-# Copyright (c) 2009 Manuel Gebele <forensixs@gmx.de>
+# Copyright (c) 2009 Manuel Gebele <forensixs@gmx.de>, Germany
 #
 use strict;
 use warnings;

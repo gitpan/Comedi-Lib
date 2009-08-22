@@ -1,10 +1,10 @@
 # Part of Comedi::Lib
 #
-# Copyright (c) 2009 Manuel Gebele <forensixs@gmx.de>
+# Copyright (c) 2009 Manuel Gebele <forensixs@gmx.de>, Germany
 #
 use strict;
 use warnings;
-use Inline::MakeMaker;
+use ExtUtils::MakeMaker;
 
 unless (header_found()) {
    die <<"END";
@@ -49,22 +49,29 @@ sub lib_found {
    return;
 }
 
-WriteMakefile(
-   NAME                => 'Comedi::Lib',
-   AUTHOR              => 'Manuel Gebele <forensixs@gmx.de>',
-   VERSION_FROM        => 'lib/Comedi/Lib.pm',
-   ABSTRACT_FROM       => 'lib/Comedi/Lib.pm',
-   ($ExtUtils::MakeMaker::VERSION >= 6.3002 ? ('LICENSE'=> 'perl') : ()),
-   PL_FILES            => {},
-   PREREQ_PM => {
-      'Test::More' => 0,
-      'Carp'       => 0,
-      'POSIX'      => 0,
-      'Inline'     => 0,
-      'Inline::C'  => 0,
-      'define'     => 0, # tested with define v.1.02
-      'enum'       => 0, # tested with enum v.1.016
+my %options = %{ {
+   NAME          => 'Comedi::Lib',
+   AUTHOR        => 'Manuel Gebele <forensixs@gmx.de>',
+   VERSION_FROM  => 'Lib.pm',
+   ABSTRACT_FROM => 'Lib.pm',
+   #($ExtUtils::MakeMaker::VERSION >= 6.3002 ? (LICENSE => 'perl') : ()),
+   PL_FILES      => {},
+   PREREQ_PM     => {
+      'Test::More'    => 0,
+      'Carp'          => 0,
+      'POSIX'         => 0,
+      'InlineX::C2XS' => 0.14,
+      'define'        => 0, # tested with define v.1.02
+      'enum'          => 0, # tested with enum v.1.016
    },
-   dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-   clean               => { FILES => 'Comedi-Lib-* Lib.inl _Inline' },
-);
+   TYPEMAPS      => ['map/typemap'],
+   LIBS          => '-lcomedi',
+   #VERSION       => '0.24'
+   dist          => { COMPRESS => 'gzip -9f', SUFFIX => 'gz' },
+   #clean         => { FILES => 'Lib.bs Lib.o' }
+}};
+
+WriteMakefile(%options);
+
+# Remove the Makefile dependency. Causes problems on a few systems.
+sub MY::makefile { '' }

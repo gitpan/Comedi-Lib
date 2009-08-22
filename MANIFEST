@@ -1,17 +1,21 @@
 # 
 # Part of Comedi::Lib
 #
-# Copyright (c) 2009 Manuel Gebele <forensixs@gmx.de>
+# Copyright (c) 2009 Manuel Gebele <forensixs@gmx.de>, Germany
 #
+C2XS/C2XS.pl
 Changes
-ctags/tags
-lib/Comedi/Lib.pm
+ctags/tags_c
+ctags/tags_pm
+ctags/tags_xs
 Lib.pm
+Lib.xs
 Makefile.PL
 MANIFEST
 map/typemap
 META.yml
 README
+src/Lib.c
 t/00-load.t
 t/01-new-object.t
 t/02-subroutines.t
